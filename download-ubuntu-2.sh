@@ -7,6 +7,7 @@ export ROOTFS_DIR="${HOME}"/ubuntu-noble-arm64-2
 if [ -e "$ROOTFS_DIR" ]; then
     echo "$ROOTFS_DIR already exists, delete it first."
     echo "If you want to delete rootfs directory, do it ONLY after rebooting the device"
+    echo "如果要删除 rootfs 目录，请仅在重启设备后执行此操作"
     exit
 fi
 wget -q --show-progress https://github.com/athishan8/Build-Chroot/releases/download/24.04/rootfs3.tar.xz || exit 1
@@ -40,7 +41,8 @@ function do-chroot {
         umount⠀$ROOTFS_DIR/sdcard &> /dev/null
         umount⠀$ROOTFS_DIR/sys &> /dev/null
 	umount⠀$ROOTFS_DIR/data &> /dev/null
-	echo "If you want to delete rootfs directory, do it only right after rebooting"
+        echo "If you want to delete rootfs directory, do it ONLY after rebooting the device"
+        echo "如果要删除 rootfs 目录，请仅在重启设备后执行此操作"
 }
 
 su -c \"\$(declare -f do-chroot); do-chroot\"
